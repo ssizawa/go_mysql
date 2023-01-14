@@ -1,0 +1,37 @@
+version: '3'
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: practice
+      MYSQL_USER: izawa
+      MYSQL_PASSWORD: izawa
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/sqls:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+
+  golang:
+    container_name: go
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      target: dev
+    tty: true
+    stdin_open: true
+    volumes:
+      - type: bind
+        source: ./server/src
+        target: /src
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
