@@ -4,7 +4,7 @@ import (
 	//Ginの実装
 	"github.com/gin-gonic/gin"
 
-	"github.com/ssizawa/taskapp/server/src/controller"
+	"github.com/ssizawa/go_mysql/server/src/controller"
 )
 
 func main() {
