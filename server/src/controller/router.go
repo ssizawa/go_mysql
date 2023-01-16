@@ -34,7 +34,6 @@ func checkSession(c *gin.Context) {
 
 func Router(router *gin.Engine) {
 
-	//session
 	store := cookie.NewStore([]byte("secret"))
 	router.Use(sessions.Sessions("mysession", store))
 

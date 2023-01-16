@@ -9,12 +9,11 @@ import (
 
 func main() {
 
-	//Ginの変数
 	router := gin.Default()
 
 	//html/css/jsファイルのディレクトリをロード
-	router.LoadHTMLGlob("templates/*")
-	router.Static("/assets", "./assets")
+	router.LoadHTMLGlob("../../frontend/templates/*")
+	router.Static("../../frontend/assets", "./assets")
 
 	//routerを渡す
 	controller.Router(router)
